@@ -89,5 +89,20 @@
   SaltShaker.decrypt = function(msg, nonce, pubkey, privkey) {
     return _decoder.decode(nacl.box.open(nacl.util.decodeBase64(msg),nacl.util.decodeBase64(nonce),ed2curve.convertPublicKey(nacl.util.decodeBase64(pubkey)), ed2curve.convertSecretKey(nacl.util.decodeBase64(privkey))));
   }
+  
+  // Function:  AESencrypt(msg,key)
+  // Purpose:   uses symmetric aes password encryption to encrypt
+  // Returns:   encrypted msg
+  SaltShaker.AESencrypt = function(msg,key) {
+    return CryptoJS.AES.encrypt(msg, key).toString()
+  }
+
+  // Function:  AESdecrypt(msg,key)
+  // Purpose:   uses symmetric aes password decryption to decrypt
+  // Returns:   encrypted msg
+  SaltShaker.AESdecrypt = function(msg,key) {
+    return CryptoJS.AES.decrypt(msg, key).toString(CryptoJS.enc.Utf8)
+  }
+  
 
 })(typeof module !== 'undefined' && module.exports ? module.exports : (self.SaltShaker = self.SaltShaker || {}));
