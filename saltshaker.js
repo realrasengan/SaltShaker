@@ -3,7 +3,7 @@
 // Use nacl (tweetnacl) easily to create public private keypairs to sign, verify
 // encrypt and decrypt messages.
 //
-// Copyright (c) 2019 realrasengan
+// Copyright (c) 2019 Andrew Lee
 //
 // This is free and unencumbered software released into the public domain.
 //
