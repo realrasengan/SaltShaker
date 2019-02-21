@@ -1,6 +1,7 @@
 # SaltShaker
 
-Use nacl (tweetnacl) easily to create public private keypairs to sign, verify, encrypt and decrypt messages.
+Use nacl (tweetnacl) easily to create public private keypairs to sign, verify, encrypt and decrypt messages.  This provides
+a simple wrapper interface around dchests's tweetnacl.js which is based on tweetnacl.
 
 ## How to use SaltShaker
 Web
