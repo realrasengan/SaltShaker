@@ -38,19 +38,61 @@
   // Returns:   md5
   var _md5 = md5.md5;
   
+
   // Function:  _decoder (internal)
   // Purpose:   converts an uint8array to a string
   // Returns:   string
-  var _decoder = function (e) {
-    return new TextDecoder().decode(e);
+  var _decoder = function (array) {
+    // https://stackoverflow.com/questions/8936984/uint8array-to-string-in-javascript
+    var out, i, len, c;
+    var char2, char3;
+
+    out = "";
+    len = array.length;
+    i = 0;
+    while(i < len) {
+      c = array[i++];
+      switch(c >> 4)
+      { 
+        case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7:
+          // 0xxxxxxx
+          out += String.fromCharCode(c);
+          break;
+        case 12: case 13:
+          // 110x xxxx   10xx xxxx
+          char2 = array[i++];
+          out += String.fromCharCode(((c & 0x1F) << 6) | (char2 & 0x3F));
+          break;
+        case 14:
+          // 1110 xxxx  10xx xxxx  10xx xxxx
+          char2 = array[i++];
+          char3 = array[i++];
+          out += String.fromCharCode(((c & 0x0F) << 12) |
+                         ((char2 & 0x3F) << 6) |
+                         ((char3 & 0x3F) << 0));
+          break;
+      }
+    }
+
+    return out;
   }
 
-  // Function:  _encoder (internal)
+  // Function:  _encoder.encode (internal)
   // Purpose:   converts a string to a uint8array
   // Returns:   uint8array
-  var _encoder = function (e) {
-    return new TextEncoder().encode(e)
+  var _encoder = function (str) {
+    //https://stackoverflow.com/questions/6965107/converting-between-strings-and-arraybuffers
+    var buf = new ArrayBuffer(str.length*2); // 2 bytes for each char
+    var bufView = new Uint16Array(buf);
+
+    for (var i=0, strLen=str.length; i<strLen; i++) {
+      bufView[i] = str.charCodeAt(i);
+    }
+
+    return new Uint8Array(bufView);
   }
+
+
 
   // Function:  create
   // Purpose:   creates a keypair (optionally from privatekey)
