@@ -7,7 +7,6 @@ a simple wrapper interface around dchests's tweetnacl.js which is based on tweet
 ### Web
 1. You will need to require the following dependencies:
 - https://github.com/dchest/tweetnacl-js
-- https://code.google.com/archive/p/crypto-js/
 - https://github.com/dchest/ed2curve-js
 - https://github.com/dchest/tweetnacl-util-js
 
@@ -46,11 +45,11 @@ SaltShaker.encrypt(message, public-key, private-key)
 SaltShaker.decrypt(message, nonce, public-key, private-key)
 = Decrypt a message with a target public-key and private-key
 
-SaltShaker.AESencrypt(msg,key)
-= AES encrypt a msg with a symmetric key
+SaltShaker.encryptPSK(msg,key)
+= Encrypt a msg with a symmetric key
 
-SaltShaker.AESdecrypt(msg,key)
-= AES decrypt a msg with a symmetric key
+SaltShaker.decryptPSK(msg,nonce,key)
+= Decrypt a msg with a symmetric key and nonce
 
 ```
 

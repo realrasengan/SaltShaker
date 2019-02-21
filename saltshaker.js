@@ -33,11 +33,24 @@
 // THIS SOFTWARE IS UNAUDITED.  USE AT YOUR OWN RISK.
 
 (function(SaltShaker) {
-
+  // Function:  md5
+  // Purpose:   Get md5
+  // Returns:   md5
+  var _md5 = md5.md5;
+  
   // Function:  _decoder.decode (internal)
   // Purpose:   converts an uint8array to a string
   // Returns:   string
-  var _decoder = new TextDecoder();
+  var _decoder = function (e) {
+    return new TextDecoder().decode(e);
+  }
+
+  // Function:  _encoder.encode (internal)
+  // Purpose:   converts a string to a uint8array
+  // Returns:   uint8array
+  var _encoder = function (e) {
+    return new TextEncoder().encode(e)
+  }
 
   // Function:  create
   // Purpose:   creates a keypair (optionally from privatekey)
@@ -68,7 +81,7 @@
   SaltShaker.verify = function(signedmsg, pubkey) {
     var _returnv = null;
 
-    return ((_returnv = nacl.sign.open(nacl.util.decodeBase64(signedmsg),nacl.util.decodeBase64(pubkey))) ? _decoder.decode(_returnv) : null);
+    return ((_returnv = nacl.sign.open(nacl.util.decodeBase64(signedmsg),nacl.util.decodeBase64(pubkey))) ? _decoder(_returnv) : null);
   }
 
   // Function:  encrypt(msg, pubkey, privkey)
@@ -87,22 +100,26 @@
   // Purpose:   uses a target's pubkey and a private key to decrypt a msg
   // Returns:   original msg decrypted from the encrypted msg
   SaltShaker.decrypt = function(msg, nonce, pubkey, privkey) {
-    return _decoder.decode(nacl.box.open(nacl.util.decodeBase64(msg),nacl.util.decodeBase64(nonce),ed2curve.convertPublicKey(nacl.util.decodeBase64(pubkey)), ed2curve.convertSecretKey(nacl.util.decodeBase64(privkey))));
-  }
-  
-  // Function:  AESencrypt(msg,key)
-  // Purpose:   uses symmetric aes password encryption to encrypt
-  // Returns:   encrypted msg
-  SaltShaker.AESencrypt = function(msg,key) {
-    return CryptoJS.AES.encrypt(msg, key).toString()
+    return _decoder(nacl.box.open(nacl.util.decodeBase64(msg),nacl.util.decodeBase64(nonce),ed2curve.convertPublicKey(nacl.util.decodeBase64(pubkey)), ed2curve.convertSecretKey(nacl.util.decodeBase64(privkey))));
   }
 
-  // Function:  AESdecrypt(msg,key)
-  // Purpose:   uses symmetric aes password decryption to decrypt
-  // Returns:   encrypted msg
-  SaltShaker.AESdecrypt = function(msg,key) {
-    return CryptoJS.AES.decrypt(msg, key).toString(CryptoJS.enc.Utf8)
+  // Function:  encryptPSK(msg,key)
+  // Purpose:   uses AEAD key encryption
+  // Returns:   {"nonce":nonce,"message":msg}
+  SaltShaker.encryptPSK = function(msg,key) {
+    var _nonce = nacl.randomBytes(nacl.secretbox.nonceLength);
+
+    return {
+      "message":nacl.util.encodeBase64(nacl.secretbox(nacl.util.decodeUTF8(msg),_nonce,_encoder(_md5(key)))),
+      "nonce":nacl.util.encodeBase64(_nonce)
+    }
   }
-  
+
+  // Function:  decryptPSK(msg,key,nonce)
+  // Purpose:   uses AEAD key decryption to decrypt
+  // Returns:   decrypted msg
+  SaltShaker.decryptPSK = function(msg,key,nonce) {
+    return _decoder(nacl.secretbox.open(nacl.util.decodeBase64(msg),nacl.util.decodeBase64(nonce),_encoder(_md5(key))));
+  }
 
 })(typeof module !== 'undefined' && module.exports ? module.exports : (self.SaltShaker = self.SaltShaker || {}));
