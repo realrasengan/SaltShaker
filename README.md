@@ -8,6 +8,9 @@ Web
 - https://github.com/dchest/tweetnacl-js
 - https://github.com/dchest/ed2curve-js
 - https://github.com/dchest/tweetnacl-util-js
+- https://github.com/blueimp/JavaScript-MD5
+
+You will need the above dependencies.  These are conveniently included here incase they are hard to find.
 
 Node
 ```
