@@ -1,0 +1,27 @@
+{
+  "name": "saltshaker-crypto",
+  "version": "1.0.2",
+  "description": "Use nacl (tweetnacl) to sign, verify, encrypt and decrypt with an easy interface.  Also includes AES.",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test/test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/realrasengan/SaltShaker.git"
+  },
+  "keywords": [
+    "nacl",
+    "tweetnacl",
+    "sign",
+    "verify",
+    "encrypt",
+    "decrypt"
+  ],
+  "author": "Andrew Lee",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/realrasengan/SaltShaker/issues"
+  },
+  "homepage": "https://github.com/realrasengan/SaltShaker#readme"
+}
