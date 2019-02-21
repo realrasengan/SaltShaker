@@ -23,11 +23,11 @@ SaltShaker.encrypt(message, public-key, private-key)
 SaltShaker.decrypt(message, nonce, public-key, private-key)
 = Decrypt a message with a target public-key and private-key
 
-SaltShaker.AESencrypt(msg,key)
-= AES encrypt a msg with a symmetric key
+SaltShaker.encryptPSK(msg,key)
+= Encrypt a msg with a symmetric key
 
-SaltShaker.AESdecrypt(msg,key)
-= AES decrypt a msg with a symmetric key
+SaltShaker.decryptPSK(msg,key,nonce)
+= Decrypt a msg with a symmetric key and nonce
 
 ```
 
