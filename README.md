@@ -19,6 +19,8 @@ Use nacl (tweetnacl) easily to create public private keypairs to sign, verify, e
 
 npm install saltshaker-crypto
 
+var SaltShaker = require("saltshaker-crypto").SaltShaker;
+
 ```
 
 ## SaltShaker
