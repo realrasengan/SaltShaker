@@ -61,7 +61,7 @@ Copyright (c) 2019 Andrew Lee
 ## Thanks to
 
 - https://github.com/dchest/tweetnacl-js
-- https://code.google.com/archive/p/crypto-js/
 - https://github.com/dchest/ed2curve-js
 - https://github.com/dchest/tweetnacl-util-js
+- https://github.com/blueimp/JavaScript-MD5
 
