@@ -1,7 +1,7 @@
 {
   "name": "saltshaker-crypto",
-  "version": "1.0.4",
-  "description": "Use nacl (tweetnacl) to sign, verify, encrypt and decrypt with an easy interface.  Also includes AES.",
+  "version": "1.0.5",
+  "description": "Use nacl (tweetnacl) to sign, verify, encrypt and decrypt with an easy interface.",
   "main": "index.js",
   "scripts": {
     "test": "node test/test.js"

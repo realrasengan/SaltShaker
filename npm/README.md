@@ -48,9 +48,9 @@ console.log(y = SaltShaker.encrypt("Test",x.publickey,x.privatekey));
 
 console.log(SaltShaker.decrypt(y.message, y.nonce, x.publickey, x.privatekey));
 
-console.log(y = SaltShaker.AESencrypt("lol","hy"));
+console.log(y = SaltShaker.encryptPSK("lol","hy"));
 
-console.log(SaltShaker.AESdecrypt(y,"hy"));
+console.log(SaltShaker.decryptPSK(y.messsage,"hy",y.nonce));
 
 ```
 

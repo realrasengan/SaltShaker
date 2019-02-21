@@ -1,27 +1,20 @@
 # SaltShaker
 
-Use nacl (tweetnacl) easily to create public private keypairs to sign, verify, encrypt and decrypt messages.  This provides 
-a simple wrapper interface around dchests's tweetnacl.js which is based on tweetnacl.
+Use nacl (tweetnacl) easily to create public private keypairs to sign, verify, encrypt and decrypt messages.
 
 ## How to use SaltShaker
-### Web
-1. You will need to require the following dependencies:
+Web
 - https://github.com/dchest/tweetnacl-js
 - https://github.com/dchest/ed2curve-js
 - https://github.com/dchest/tweetnacl-util-js
 
-(Conveniently, the files are included in this repository)
-
-2. You will need to include SaltShaker into your project
-
-### node
+Node
 ```
-
 npm install saltshaker-crypto
 
 var SaltShaker = require("saltshaker-crypto").SaltShaker;
-
 ```
+
 
 ## SaltShaker
 
@@ -45,11 +38,11 @@ SaltShaker.encrypt(message, public-key, private-key)
 SaltShaker.decrypt(message, nonce, public-key, private-key)
 = Decrypt a message with a target public-key and private-key
 
-SaltShaker.encryptPSK(msg,key)
-= Encrypt a msg with a symmetric key
+SaltShaker.AESencrypt(msg,key)
+= AES encrypt a msg with a symmetric key
 
-SaltShaker.decryptPSK(msg,nonce,key)
-= Decrypt a msg with a symmetric key and nonce
+SaltShaker.AESdecrypt(msg,key)
+= AES decrypt a msg with a symmetric key
 
 ```
 
@@ -69,13 +62,12 @@ console.log(y = SaltShaker.encrypt("Test",x.publickey,x.privatekey));
 
 console.log(SaltShaker.decrypt(y.message, y.nonce, x.publickey, x.privatekey));
 
-console.log(y = SaltShaker.AESencrypt("lol","hy"));
+console.log(y = SaltShaker.encryptPSK("lol","hy"));
 
-console.log(SaltShaker.AESdecrypt(y,"hy"));
+console.log(SaltShaker.decryptPSK(y.message,"hy",y.nonce));
 
 ```
 
 ## License
 
 Copyright (c) 2019 Andrew Lee
-

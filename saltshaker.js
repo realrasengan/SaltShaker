@@ -38,14 +38,14 @@
   // Returns:   md5
   var _md5 = md5.md5;
   
-  // Function:  _decoder.decode (internal)
+  // Function:  _decoder (internal)
   // Purpose:   converts an uint8array to a string
   // Returns:   string
   var _decoder = function (e) {
     return new TextDecoder().decode(e);
   }
 
-  // Function:  _encoder.encode (internal)
+  // Function:  _encoder (internal)
   // Purpose:   converts a string to a uint8array
   // Returns:   uint8array
   var _encoder = function (e) {
