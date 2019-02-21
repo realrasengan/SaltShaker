@@ -1,6 +1,7 @@
 # SaltShaker
 
-Use nacl (tweetnacl) easily to create public private keypairs to sign, verify, encrypt and decrypt messages.  Also includes AES from CryptoJS.
+Use nacl (tweetnacl) easily to create public private keypairs to sign, verify, encrypt and decrypt messages.  This provides 
+a simple wrapper interface around dchests's tweetnacl.js which is based on tweetnacl.
 
 ```
 
@@ -56,4 +57,11 @@ console.log(SaltShaker.AESdecrypt(y,"hy"));
 ## License
 
 Copyright (c) 2019 Andrew Lee
+
+## Thanks to
+
+- https://github.com/dchest/tweetnacl-js
+- https://code.google.com/archive/p/crypto-js/
+- https://github.com/dchest/ed2curve-js
+- https://github.com/dchest/tweetnacl-util-js
 
